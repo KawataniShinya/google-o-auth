@@ -49,6 +49,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $this->session()->put('is_password_login', true);
         RateLimiter::clear($this->throttleKey());
     }
 

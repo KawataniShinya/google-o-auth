@@ -13,7 +13,11 @@ class TwoFactorAuthMiddleware
     {
         $user = Auth::user();
 
-        if ($user && !$request->session()->get('two_factor_passed')) {
+        if (
+            $user
+            && !$request->session()->get('two_factor_passed')
+            && $request->session()->has('is_password_login'))
+        {
             return Redirect::route('two-factor-authentication');
         }
 
